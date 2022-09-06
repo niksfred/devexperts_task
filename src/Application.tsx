@@ -4,8 +4,12 @@ const Application = () => {
   const [filter, setFilter] = useState([]);
   return (
     <div>
-      <div>
-        <header></header>
+      <div className="w-4/5">
+        <header>
+          <div>
+            <img src="./devexperts_logo.png" alt="logo" />
+          </div>
+        </header>
         <main></main>
       </div>
     </div>
