@@ -1,4 +1,72 @@
-import React from "react";
+import { useState } from "react";
+
+export interface RecipeProps {
+  title: string;
+  timeToPrepare: string;
+  imageUrl: string;
+  ingredients: [];
+  preparationMethod: [];
+}
+
+const RecipeCard = ({
+  title,
+  timeToPrepare,
+  imageUrl,
+  ingredients,
+  preparationMethod,
+}: RecipeProps) => {
+  const [isPopupShowing, setIsPopupShowing] = useState<boolean>(false);
+  console.log(preparationMethod);
+  return (
+    <div className="relative w-72 shadow-md rounded-md">
+      <div className="p-4">
+        <h2 className="text-gray-900 text-2xl font-semibold">{title}</h2>
+        <span className="font-normal text-gray-600">{timeToPrepare}</span>
+      </div>
+      <div>
+        <img src={imageUrl} alt="dish" />
+      </div>
+      <div className="p-4 mb-8">
+        <ul className="font-normal text-gray-600 list-disc p-4">
+          {ingredients.map((el, index) => (
+            <li key={`${title}-ingredient-${index}`}>{el}</li>
+          ))}
+        </ul>
+      </div>
+      <div className="absolute bottom-4 left-4">
+        <button onClick={() => setIsPopupShowing(true)}>
+          <i>{getPopupIcon()}</i>
+        </button>
+      </div>
+      {isPopupShowing && (
+        <div className="h-screen w-screen fixed top-0 left-0 flex justify-center items-center z-50">
+          <div
+            className="h-screen w-screen bg-black opacity-75 z-45 absolute"
+            onClick={() => setIsPopupShowing(false)}
+          ></div>
+          <ol className="w-2/5 bg-white p-4 pr-10 rounded-md z-50 relative">
+            {preparationMethod.map((el: { step: number; text: string }) => (
+              <li className="flex items-center">
+                <div className="text-3xl h-12 w-12 p-4 m-4 bg-orange-600 rounded-full flex justify-center items-center">
+                  <span className="text-white">{el.step}</span>
+                </div>
+                <span className="font-medium">{el.text}</span>
+              </li>
+            ))}
+            <button
+              onClick={() => setIsPopupShowing(false)}
+              className="absolute top-0 right-2 text-2xl"
+            >
+              &times;
+            </button>
+          </ol>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default RecipeCard;
 
 function getPopupIcon() {
   return (
@@ -18,47 +86,3 @@ function getPopupIcon() {
     </svg>
   );
 }
-
-export interface RecipeProps {
-  title: string;
-  timeToPrepare: string;
-  imageUrl: string;
-  ingredients: [];
-  preparationMethod: {};
-}
-
-const RecipeCard = ({
-  title,
-  timeToPrepare,
-  imageUrl,
-  ingredients,
-  preparationMethod,
-}: RecipeProps) => {
-  //   const [isOpen, setIsOpen] = useState<boolean>(false);
-
-  return (
-    <div className="relative w-72 shadow-md rounded-md">
-      <div className="p-4">
-        <h2 className="text-gray-900 text-2xl font-semibold">{title}</h2>
-        <span className="font-normal text-gray-600">{timeToPrepare}</span>
-      </div>
-      <div>
-        <img src={imageUrl} alt="dish" />
-      </div>
-      <div className="p-4 mb-8">
-        <ul className="font-normal text-gray-600 list-disc p-4">
-          {ingredients.map((el, index) => (
-            <li key={`${title}-ingredient-${index}`}>{el}</li>
-          ))}
-        </ul>
-      </div>
-      <div className="absolute bottom-4 left-4">
-        <button>
-          <i>{getPopupIcon()}</i>
-        </button>
-      </div>
-    </div>
-  );
-};
-
-export default RecipeCard;

@@ -26,7 +26,7 @@ const Application: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-center">
+    <div className="flex flex-col items-center">
       <div className="w-4/5">
         <header className="flex justify-between h-12 mt-4 px-3 py-2 shadow-md rounded-md z-10">
           <div className="h-full">
@@ -46,6 +46,16 @@ const Application: React.FC = () => {
               ))}
         </main>
       </div>
+      <footer className="w-full flex flex-col items-center p-4 shadow-inner mt-8 mb-4">
+        <p className="text-center text-sm font-semibold text-slate-700">
+          Please do not try these recipes at home. We hope that they will
+          inspire you to cook more, but consider that their main idea is your
+          coding task for Devexperts.
+        </p>
+        <p className="text-center text-sm font-semibold text-slate-700">
+          Copyright 2022. All rights reserved.
+        </p>
+      </footer>
     </div>
   );
 };

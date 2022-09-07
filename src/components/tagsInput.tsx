@@ -30,7 +30,7 @@ const TagsInput: React.FC<TagsInputProps> = ({ tags, setTags }) => {
           key={`tag-${index}`}
         >
           <span
-            className="w-auto text-slate-100 bg-red-500 rounded-sm"
+            className="w-auto text-slate-100 bg-orange-600 rounded-sm cursor-pointer"
             onClick={() => removeTag(index)}
           >
             {getCheckMarkIcon()}
